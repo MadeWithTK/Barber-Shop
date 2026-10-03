@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do'kon | GENTLEMAN Premium Barber Shop</title>
+    <meta name="description" content="Premium erkaklar kosmetikasi, soch va soqol parvarishi uchun original mahsulotlar.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & RESET
+           ========================================================================== */
+        :root {
+            --primary-gold: #D4AF37;
+            --primary-gold-dark: #AA8B2C;
+            --primary-gold-light: #F3E5AB;
+            --bg-dark: #0A0A0A;
+            --bg-darker: #050505;
+            --bg-card: #141414;
+            --bg-card-hover: #1c1c1c;
+            --text-light: #F5F5F5;
+            --text-muted: #A0A0A0;
+            --border-color: rgba(212, 175, 55, 0.2);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: all 0.2s ease;
+            --container-width: 1300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            color: inherit;
+            outline: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-darker); }
+        ::-webkit-scrollbar-thumb { background: var(--primary-gold); border-radius: 4px; }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================================================
+           HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 2px;
+        }
+
+        .logo span { color: var(--primary-gold); }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-gold);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+        .nav-links a.active { color: var(--primary-gold); }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            transition: var(--transition-fast);
+        }
+
+        .cart-btn:hover {
+            background-color: var(--primary-gold);
+            border-color: var(--primary-gold);
+            color: var(--bg-dark);
+        }
+
+        .cart-btn:hover svg { fill: var(--bg-dark); }
+
+        .cart-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary-gold);
+            transition: var(--transition-fast);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-family: sans-serif;
+            border: 2px solid var(--bg-darker);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .menu-toggle span { height: 2px; width: 100%; background: var(--text-light); transition: var(--transition-smooth); }
+
+        /* ==========================================================================
+           PAGE HEADER
+           ========================================================================== */
+        .page-header {
+            margin-top: 86px;
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(rgba(5, 5, 5, 0.8), rgba(5, 5, 5, 0.95)), url('https://images.unsplash.com/photo-1596328546171-77e37b5fefea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           SHOP LAYOUT
+           ========================================================================== */
+        .shop-section { padding: 80px 0; }
+        .shop-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+        }
+
+        /* ==========================================================================
+           SIDEBAR FILTERS
+           ========================================================================== */
+        .sidebar {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .filter-group { margin-bottom: 30px; }
+        .filter-group:last-child { margin-bottom: 0; }
+        .filter-group h3 {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .category-list li { margin-bottom: 10px; }
+        .category-btn {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            text-align: left;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            padding: 5px 0;
+            transition: var(--transition-fast);
+        }
+
+        .category-btn:hover, .category-btn.active { color: var(--primary-gold); }
+        .category-btn .count {
+            background: rgba(255,255,255,0.05);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        .category-btn.active .count {
+            background: var(--primary-gold);
+            color: var(--bg-dark);
+        }
+
+        /* ==========================================================================
+           PRODUCTS GRID
+           ========================================================================== */
+        .shop-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .results-count { color: var(--text-muted); font-size: 0.95rem; }
+        
+        .sort-box select {
+            background-color: var(--bg-card);
+            color: var(--text-light);
+            border: 1px solid var(--border-light);
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+        }
+        .sort-box select:focus { border-color: var(--primary-gold); }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* PRODUCT CARD */
+        .product-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            border-color: var(--border-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-gold);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 20px;
+            z-index: 2;
+        }
+
+        .product-image {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background-color: #fff; /* To make product pop */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image img { transform: scale(1.1); }
+
+        .product-overlay {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .product-card:hover .product-overlay {
+            bottom: 0;
+            opacity: 1;
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--primary-gold);
+            color: var(--bg-dark);
+            width: 100%;
+            padding: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition-fast);
+        }
+
+        .add-to-cart-btn:hover { background-color: var(--primary-gold-light); }
+        .add-to-cart-btn svg { width: 18px; height: 18px; fill: var(--bg-dark); }
+
+        .product-info { padding: 25px 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            line-height: 1.3;
+        }
+
+        .product-rating {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 15px;
+        }
+
+        .product-rating svg { width: 14px; height: 14px; fill: var(--primary-gold); }
+        .product-rating .empty { fill: #333; }
+
+        .product-bottom {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        /* ==========================================================================
+           CART SIDEBAR (MODAL)
+           ========================================================================== */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px; /* Hidden initially */
+            width: 400px;
+            max-width: 100%;
+            height: 100%;
+            background-color: var(--bg-darker);
+            border-left: 1px solid var(--border-color);
+            z-index: 2001;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition-smooth);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+        }
+
+        .cart-sidebar.active { right: 0; }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 20px;
+        }
+
+        .cart-header h2 { font-size: 1.5rem; color: var(--primary-gold); }
+        .close-cart {
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .close-cart:hover { background: var(--primary-gold); }
+        .close-cart:hover svg { fill: var(--bg-dark); }
+        .close-cart svg { width: 16px; height: 16px; fill: var(--text-light); transition: var(--transition-fast); }
+
+        .cart-items { flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+
+        .cart-empty-msg {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 50px;
+            font-size: 1.1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 6px;
+            padding: 5px;
+            flex-shrink: 0;
+        }
+        .cart-item-img img { width: 100%; height: 100%; object-fit: contain; }
+
+        .cart-item-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        
+        .cart-item-title { font-size: 0.95rem; font-weight: 600; color: var(--text-light); line-height: 1.2; margin-bottom: 5px;}
+        .cart-item-price { color: var(--primary-gold); font-size: 1rem; font-family: 'Playfair Display', serif; }
+
+        .cart-item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .qty-controls { display: flex; align-items: center; border: 1px solid var(--border-light); border-radius: 4px; overflow: hidden; }
+        .qty-btn { width: 28px; height: 28px; background: var(--bg-card); color: var(--text-light); font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: var(--transition-fast); }
+        .qty-btn:hover { background: var(--primary-gold); color: var(--bg-dark); }
+        .qty-input { width: 35px; height: 28px; text-align: center; background: transparent; border: none; color: var(--text-light); font-size: 0.9rem; outline: none;}
+
+        .remove-btn { color: #e74c3c; font-size: 0.85rem; display: flex; align-items: center; gap: 5px; transition: var(--transition-fast); }
+        .remove-btn:hover { color: #c0392b; }
+        .remove-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+        .cart-footer { padding-top: 20px; border-top: 1px solid var(--border-light); margin-top: 10px; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.3rem; margin-bottom: 20px; font-weight: 600; }
+        .cart-total span:last-child { color: var(--primary-gold); font-family: 'Playfair Display', serif; }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: var(--primary-gold);
+            color: var(--bg-dark);
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            transition: var(--transition-fast);
+        }
+        .checkout-btn:hover { background-color: var(--primary-gold-light); }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary-gold);
+            color: var(--bg-dark);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* ==========================================================================
+           FOOTER (Same as index.html for consistency)
+           ========================================================================== */
+        footer { background-color: #030303; padding: 80px 0 30px; border-top: 1px solid #1a1a1a; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-widget h3 { color: var(--primary-gold); font-size: 1.5rem; margin-bottom: 25px; }
+        .footer-widget p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: var(--text-muted); font-size: 0.95rem; }
+        .footer-links a:hover { color: var(--primary-gold); padding-left: 5px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; fill: var(--text-muted); }
+        .social-icons a:hover { background-color: var(--primary-gold); border-color: var(--primary-gold); fill: var(--bg-dark); transform: translateY(-3px); }
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem; }
+
+        /* ==========================================================================
+           RESPONSIVE
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .shop-container { grid-template-columns: 1fr; }
+            .sidebar { position: static; margin-bottom: 30px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background-color: var(--bg-darker); flex-direction: column;
+                padding: 30px 20px; gap: 20px; text-align: center;
+                border-top: 1px solid var(--border-color);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transition: all 0.5s ease;
+            }
+            .nav-links.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+            .menu-toggle { display: flex; }
+            .header-actions { margin-right: 20px; }
+            .cart-sidebar { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================= HEADER ================================= -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">GENTLE<span>MAN</span></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Bosh sahifa</a>
+                <a href="products.html" class="active">Kosmetikalar</a>
+                <a href="about.html">Biz haqimizda</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="cart-btn" id="openCartBtn" aria-label="Savatchani ochish">
+                    <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <div class="menu-toggle" id="mobileMenu">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================================= PAGE HEADER ================================= -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Premium Do'kon</h1>
+            <p>Faqat jahon standartlariga javob beruvchi professional erkaklar kosmetikasi. O'z uslubingizni uyda ham davom ettiring.</p>
+        </div>
+    </section>
+
+    <!-- ================================= SHOP SECTION ================================= -->
+    <section class="shop-section">
+        <div class="container shop-container">
+            
+            <!-- Sidebar Filters -->
+            <aside class="sidebar">
+                <div class="filter-group">
+                    <h3>Kategoriyalar</h3>
+                    <ul class="category-list" id="categoryFilter">
+                        <li><button class="category-btn active" data-filter="all">Barchasi <span class="count">12</span></button></li>
+                        <li><button class="category-btn" data-filter="soch">Soch parvarishi <span class="count">4</span></button></li>
+                        <li><button class="category-btn" data-filter="soqol">Soqol uchun <span class="count">4</span></button></li>
+                        <li><button class="category-btn" data-filter="yuz">Yuz parvarishi <span class="count">3</span></button></li>
+                        <li><button class="category-btn" data-filter="aksessuar">Aksessuarlar <span class="count">1</span></button></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Products Grid -->
+            <main class="shop-content">
+                <div class="shop-topbar">
+                    <div class="results-count">Jami: <span id="totalProducts">12</span> ta mahsulot</div>
+                    <div class="sort-box">
+                        <select id="sortSelect">
+                            <option value="default">Odatiy saralash</option>
+                            <option value="price-low">Arzondan qimmatga</option>
+                            <option value="price-high">Qimmatdan arzonga</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Mahsulotlar JS orqali shu yerga render qilinadi -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- Cards will be injected here -->
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- ================================= CART SIDEBAR & OVERLAY ================================= -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Sizning Savatchangiz</h2>
+            <button class="close-cart" id="closeCartBtn">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+        </div>
+        
+        <div class="cart-items" id="cartItemsContainer">
+            <!-- Cart items will appear here -->
+            <div class="cart-empty-msg">Savatchangiz hozircha bo'sh.</div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Jami:</span>
+                <span id="cartTotalPrice">0 UZS</span>
+            </div>
+            <button class="checkout-btn" onclick="alert('Buyurtmani rasmiylashtirish sahifasiga o\'tilmoqda...')">Buyurtma berish</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastMsg">Mahsulot savatchaga qo'shildi!</div>
+
+    <!-- ================================= FOOTER ================================= -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <a href="index.html" class="logo" style="margin-bottom: 20px; display: block; font-size: 24px;">GENTLE<span>MAN</span></a>
+                    <p>O'zbekistondagi 1-raqamli premium sartaroshxona. Biz shunchaki xizmat ko'rsatmaymiz, biz erkaklar uchun hayot tarzini yaratamiz.</p>
+                    <div class="social-icons">
+                        <a href="#"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-widget">
+                    <h3>Tezkor Havolalar</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Bosh sahifa</a></li>
+                        <li><a href="about.html">Biz haqimizda</a></li>
+                        <li><a href="products.html">Kosmetikalar</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright"><p>&copy; 2024 GENTLEMAN Premium Barber Shop.</p></div>
+        </div>
+    </footer>
+
+    <!-- ================================= JAVASCRIPT ================================= -->
+    <script>
+        // --- 1. MOCK DATA: MAHSULOTLAR BAZASI ---
+        // Loyiha real bo'lishi uchun, mahsulotlar obyekti (JSON formatida) yaratildi.
+        const products = [
+            { id: 1, title: "Reuzel Blue Pomade", category: "soch", price: 250000, img: "https://images.unsplash.com/photo-1599305090598-fe179d501227?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "Hit", rating: 5 },
+            { id: 2, title: "Proraso Soqol Yog'i (Wood & Spice)", category: "soqol", price: 180000, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "", rating: 5 },
+            { id: 3, title: "Uppercut Deluxe Matt Clay", category: "soch", price: 280000, img: "https://images.unsplash.com/photo-1629198725916-24a9e52c8038?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "Yangi", rating: 4 },
+            { id: 4, title: "GENTLEMAN Qora Niqob", category: "yuz", price: 90000, img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "", rating: 4 },
+            { id: 5, title: "Barber Qaychi (Premium Steel)", category: "aksessuar", price: 450000, img: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "Pro", rating: 5 },
+            { id: 6, title: "Proraso Tinchlantiruvchi Losyon", category: "yuz", price: 150000, img: "https://images.unsplash.com/photo-1611078732163-4414f6b6ebcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "", rating: 5 },
+            { id: 7, title: "American Crew Fiber", category: "soch", price: 220000, img: "https://images.unsplash.com/photo-1626806787426-5910811b6325?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "Hit", rating: 4 },
+            { id: 8, title: "Soqol Tarash Uchun Chotka (Qobon)", category: "soqol", price: 120000, img: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "", rating: 5 },
+            { id: 9, title: "Morgans Soqol Balzami", category: "soqol", price: 195000, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "", rating: 4 },
+            { id: 10, title: "Dapper Dan Hair Tonic", category: "soch", price: 160000, img: "https://images.unsplash.com/photo-1599305090598-fe179d501227?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "", rating: 4 },
+            { id: 11, title: "Reuzel Shave Cream", category: "soqol", price: 140000, img: "https://images.unsplash.com/photo-1611078732163-4414f6b6ebcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "", rating: 5 },
+            { id: 12, title: "Yuz Skrabi (Coffee Extract)", category: "yuz", price: 110000, img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", badge: "Yangi", rating: 4 }
+        ];
+
+        let cart = []; // Savatcha holati
+        const formatPrice = (price) => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " UZS";
+
+        // --- 2. MAHSULOTLARNI RENDER QILISH ---
+        const productsGrid = document.getElementById('productsGrid');
+        
+        function renderProducts(items) {
+            productsGrid.innerHTML = '';
+            
+            if(items.length === 0) {
+                productsGrid.innerHTML = `<p style="color:var(--text-muted); grid-column: 1/-1; text-align:center;">Ushbu kategoriyada mahsulot topilmadi.</p>`;
+                return;
+            }
+
+            items.forEach(product => {
+                // Generate Stars
+                let starsHTML = '';
+                for(let i=1; i<=5; i++) {
+                    if(i <= product.rating) starsHTML += `<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+                    else starsHTML += `<svg class="empty" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+                }
+
+                const badgeHTML = product.badge ? `<div class="product-badge">${product.badge}</div>` : '';
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    ${badgeHTML}
+                    <div class="product-image">
+                        <img src="${product.img}" alt="${product.title}">
+                        <div class="product-overlay">
+                            <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                                <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                                Savatga
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-rating">${starsHTML}</div>
+                        <div class="product-bottom">
+                            <span class="product-price">${formatPrice(product.price)}</span>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(card);
+            });
+            document.getElementById('totalProducts').innerText = items.length;
+        }
+
+        // Boshlang'ich holatda barcha mahsulotlarni chiqarish
+        renderProducts(products);
+
+        // --- 3. FILTER VA SARALASH MANTIG'I ---
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        let currentFilter = 'all';
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                currentFilter = e.currentTarget.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        document.getElementById('sortSelect').addEventListener('change', applyFilters);
+
+        function applyFilters() {
+            let filtered = products;
+            
+            // Kategoriya bo'yicha filter
+            if(currentFilter !== 'all') {
+                filtered = products.filter(p => p.category === currentFilter);
+            }
+
+            // Narx bo'yicha saralash
+            const sortVal = document.getElementById('sortSelect').value;
+            if(sortVal === 'price-low') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortVal === 'price-high') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else {
+                // Default: ID bo'yicha o'sish
+                filtered.sort((a, b) => a.id - b.id);
+            }
+
+            renderProducts(filtered);
+        }
+
+        // --- 4. SAVATCHA (CART) MANTIG'I ---
+        const cartBadge = document.getElementById('cartBadge');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalPrice = document.getElementById('cartTotalPrice');
+        const toast = document.getElementById('toastMsg');
+
+        // Savatchani ochish / yopish
+        document.getElementById('openCartBtn').addEventListener('click', () => toggleCart(true));
+        document.getElementById('closeCartBtn').addEventListener('click', () => toggleCart(false));
+        cartOverlay.addEventListener('click', () => toggleCart(false));
+
+        function toggleCart(show) {
+            if(show) {
+                cartSidebar.classList.add('active');
+                cartOverlay.classList.add('active');
+            } else {
+                cartSidebar.classList.remove('active');
+                cartOverlay.classList.remove('active');
+            }
+        }
+
+        // Savatchaga qo'shish (HTML id orqali chaqiriladi)
+        window.addToCart = (id) => {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
+
+            if(existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            
+            updateCartUI();
+            showToast();
+        };
+
+        // UI ni yangilash
+        function updateCartUI() {
+            // Badge update
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartBadge.innerText = totalQty;
+
+            // Items render
+            cartItemsContainer.innerHTML = '';
+            
+            if(cart.length === 0) {
+                cartItemsContainer.innerHTML = `<div class="cart-empty-msg">Savatchangiz hozircha bo'sh.</div>`;
+                cartTotalPrice.innerText = "0 UZS";
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <div class="cart-item-img"><img src="${item.img}" alt="${item.title}"></div>
+                    <div class="cart-item-info">
+                        <div>
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">${formatPrice(item.price)}</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="qty-controls">
+                                <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                                <input type="text" class="qty-input" value="${item.qty}" readonly>
+                                <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(${index})">
+                                <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                O'chirish
+                            </button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemEl);
+            });
+
+            cartTotalPrice.innerText = formatPrice(total);
+        }
+
+        // Miqdorni o'zgartirish
+        window.changeQty = (index, delta) => {
+            cart[index].qty += delta;
+            if(cart[index].qty <= 0) cart.splice(index, 1);
+            updateCartUI();
+        };
+
+        // Mahsulotni o'chirish
+        window.removeItem = (index) => {
+            cart.splice(index, 1);
+            updateCartUI();
+        };
+
+        // Toast xabar
+        function showToast() {
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // --- 5. MOBILE MENU LOGIC ---
+        const menuToggle = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+    </script>
+</body>
+</html>

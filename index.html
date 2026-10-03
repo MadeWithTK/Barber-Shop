@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENTLEMAN | Premium Barber Shop</title>
+    <meta name="description" content="Eng zamonaviy va professional premium darajadagi sartaroshxona xizmatlari. O'zingizning mukammal uslubingizni yarating.">
+    
+    <!-- Google Fonts: Playfair Display for elegant headings, Montserrat for clean body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & RESET
+           ========================================================================== */
+        :root {
+            --primary-gold: #D4AF37;
+            --primary-gold-dark: #AA8B2C;
+            --bg-dark: #0A0A0A;
+            --bg-darker: #050505;
+            --bg-card: #141414;
+            --text-light: #F5F5F5;
+            --text-muted: #A0A0A0;
+            --border-color: rgba(212, 175, 55, 0.2);
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --container-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 4px;
+        }
+
+        /* ==========================================================================
+           TYPOGRAPHY & UTILITIES
+           ========================================================================== */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-gold);
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            border: 1px solid var(--primary-gold);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: var(--bg-dark);
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--primary-gold);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-gold);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-gold);
+            color: var(--bg-dark);
+        }
+
+        /* ==========================================================================
+           HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 25px 0;
+            transition: var(--transition-smooth);
+            background: transparent;
+        }
+
+        header.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            color: var(--primary-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-gold);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-gold);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+
+        .menu-toggle span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: var(--text-light);
+            transition: var(--transition-smooth);
+        }
+
+        .menu-toggle span:nth-child(1) { top: 0; }
+        .menu-toggle span:nth-child(2) { top: 9px; }
+        .menu-toggle span:nth-child(3) { top: 18px; }
+
+        .menu-toggle.active span:nth-child(1) {
+            top: 9px;
+            transform: rotate(45deg);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            top: 9px;
+            transform: rotate(-45deg);
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ==========================================================================
+           SERVICES SECTION
+           ========================================================================== */
+        .services {
+            background-color: var(--bg-darker);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            padding: 50px 30px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .service-card:hover {
+            border-color: var(--border-color);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 25px;
+            fill: var(--primary-gold);
+            transition: var(--transition-smooth);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-price {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-gold);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================================================
+           FEATURES / ABOUT PREVIEW
+           ========================================================================== */
+        .features {
+            background-color: var(--bg-dark);
+            position: relative;
+        }
+
+        .features-flex {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .features-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .features-image img {
+            border-radius: 4px;
+            box-shadow: 20px 20px 0 var(--border-color);
+        }
+
+        .features-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100px;
+            height: 100px;
+            border-top: 3px solid var(--primary-gold);
+            border-left: 3px solid var(--primary-gold);
+        }
+
+        .features-content {
+            flex: 1;
+        }
+
+        .feature-list {
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            margin-bottom: 25px;
+        }
+
+        .feature-item-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 20px;
+            fill: var(--primary-gold);
+            flex-shrink: 0;
+        }
+
+        .feature-item-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .feature-item-text p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           GALLERY SECTION
+           ========================================================================== */
+        .gallery {
+            background-color: var(--bg-darker);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            border-radius: 4px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(212, 175, 55, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .gallery-overlay svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--bg-dark);
+            transform: translateY(20px);
+            transition: var(--transition-smooth);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-overlay svg {
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        footer {
+            background-color: #030303;
+            padding: 80px 0 30px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-widget h3 {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+        }
+
+        .footer-widget p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-gold);
+            padding-left: 5px;
+        }
+
+        .working-hours li {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            fill: var(--text-muted);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-gold);
+            border-color: var(--primary-gold);
+            fill: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           ANIMATIONS & REVEAL EFFECTS
+           ========================================================================== */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .hero-title { font-size: 3.5rem; }
+            .features-flex { flex-direction: column; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-darker);
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 20px;
+                text-align: center;
+                border-top: 1px solid var(--border-color);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .menu-toggle { display: block; }
+            .hero-title { font-size: 2.5rem; }
+            .section-padding { padding: 80px 0; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================= HEADER ================================= -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">GENTLE<span>MAN</span></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="active">Bosh sahifa</a>
+                <a href="products.html">Kosmetikalar (Do'kon)</a>
+                <a href="about.html">Biz haqimizda</a>
+                <a href="#services">Xizmatlar</a>
+            </nav>
+
+            <div class="menu-toggle" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================================= HERO SECTION ================================= -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-subtitle">Haqiqiy erkaklar uchun</span>
+                <h1 class="hero-title">Mukammal Uslubingizni Yarating</h1>
+                <p class="hero-desc">Premium xizmatlar, malakali ustalar va yoqimli muhit. O'zingizni haqiqiy Jentlmenlardek his qiling va yuqori sifatli xizmatdan bahramand bo'ling.</p>
+                <div class="hero-btns">
+                    <a href="#booking" class="btn btn-gold" style="margin-right: 15px;">Joy band qilish</a>
+                    <a href="products.html" class="btn btn-outline">Kosmetikalar xaridi</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================= SERVICES ================================= -->
+    <section id="services" class="services section-padding">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Xizmatlarimiz</h2>
+                <p>Biz faqatgina sochni qisqartirmaymiz, balki sizning shaxsiy uslubingizni va xarakteringizni ochib beruvchi san'at asarini yaratamiz.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 512 512">
+                        <path d="M495.2 24.3L487.7 16.8c-10-10-26.2-10-36.2 0l-149 149c-3 3-5.2 6.8-6.3 10.9L285 220l-122-122c-15.6-15.6-40.9-15.6-56.6 0l-88 88c-15.6 15.6-15.6 40.9 0 56.6l122 122-43.3 11.2c-4.1 1.1-7.9 3.3-10.9 6.3l-69 69c-10 10-10 26.2 0 36.2l7.5 7.5c10 10 26.2 10 36.2 0l69-69c3-3 6.8-5.2 10.9-6.3l11.2-43.3 122 122c15.6 15.6 40.9 15.6 56.6 0l88-88c15.6-15.6 15.6-40.9 0-56.6l-122-122 43.3-11.2c4.1-1.1 7.9-3.3 10.9-6.3l149-149c10.1-10 10.1-26.2.1-36.2zm-284 316.5l-82.5-82.5 88-88 82.5 82.5-88 88zm138.8-138.8l-52.6-52.6 127.3-127.3 52.6 52.6-127.3 127.3z"/>
+                    </svg>
+                    <h3 class="service-title">Klassik Soch Turmagi</h3>
+                    <span class="service-price">100,000 UZS</span>
+                    <p class="service-desc">Professional ustalarimiz tomonidan yuz tuzilishingizga mos mukammal soch qirqish va yuvish xizmati.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 512 512">
+                        <path d="M451.9 44H60.1C26.9 44 0 70.9 0 104.1v303.8C0 441.1 26.9 468 60.1 468h391.8c33.2 0 60.1-26.9 60.1-60.1V104.1C512 70.9 485.1 44 451.9 44zM32 104.1c0-15.5 12.6-28.1 28.1-28.1h391.8c15.5 0 28.1 12.6 28.1 28.1V160H32v-55.9zM479.9 407.9c0 15.5-12.6 28.1-28.1 28.1H60.1c-15.5 0-28.1-12.6-28.1-28.1V192h447.9v215.9z"/>
+                        <path d="M128 256h256v32H128zM128 320h192v32H128z"/>
+                    </svg>
+                    <h3 class="service-title">Soqol Tekislash</h3>
+                    <span class="service-price">60,000 UZS</span>
+                    <p class="service-desc">Soqolni tekislash, forma berish va terini tinchlantiruvchi maxsus premium losyonlar bilan ishlov berish.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 512 512">
+                        <path d="M362.7 149.3L288 128l-74.7 21.3C197.6 153.8 184 167.4 184 184v168c0 17.7 14.3 32 32 32h80c17.7 0 32-14.3 32-32V184c0-16.6-13.6-30.2-29.3-34.7z"/>
+                        <path d="M464 96H48C21.5 96 0 117.5 0 144v224c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48zM144 336H64V160h80v176zm304 0h-80V160h80v176z"/>
+                    </svg>
+                    <h3 class="service-title">Katta Kompleks</h3>
+                    <span class="service-price">180,000 UZS</span>
+                    <p class="service-desc">Soch qirqish, soqol tekislash, yuzni qora niqob bilan tozalash, quloq/burun tuklarini tozalash va massaj.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================= FEATURES / ABOUT ================================= -->
+    <section class="features section-padding">
+        <div class="container">
+            <div class="features-flex">
+                <div class="features-image reveal">
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Premium Barber Interior">
+                </div>
+                <div class="features-content reveal">
+                    <div class="section-title" style="text-align: left; margin-bottom: 30px;">
+                        <h2>Nega aynan biz?</h2>
+                        <p style="margin: 0; max-width: 100%;">GENTLEMAN — bu shunchaki sartaroshxona emas, bu haqiqiy erkaklar uchun yopiq klub muhitidir.</p>
+                    </div>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <svg class="feature-item-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <div class="feature-item-text">
+                                <h4>Premium Kosmetikalar</h4>
+                                <p>Faqat jahon standartlariga javob beruvchi professional brendlardan (Reuzel, Proraso, uppercut) foydalanamiz.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-item-icon" viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+                            <div class="feature-item-text">
+                                <h4>Malakali Mutaxassislar</h4>
+                                <p>Bizning ustalarimiz Yevropa maktablarida malaka oshirgan va 5 yildan ortiq tajribaga ega.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-item-icon" viewBox="0 0 24 24"><path d="M21 4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H3V6h18v12z"/></svg>
+                            <div class="feature-item-text">
+                                <h4>Qulay Kuting</h4>
+                                <p>Kutish vaqtida bepul premium qahva, viski, PlayStation va yoqimli musiqa xizmatingizda.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html" class="btn btn-outline" style="margin-top: 20px;">Batafsil o'qish</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================= GALLERY ================================= -->
+    <section class="gallery section-padding">
+        <div class="container-fluid">
+            <div class="section-title reveal">
+                <h2>Ishlarimizdan Namunalar</h2>
+                <p>Bizning professionallarimiz yaratgan mukammal uslublar.</p>
+            </div>
+            
+            <div class="gallery-grid reveal">
+                <!-- Gallery items -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery 1">
+                    <div class="gallery-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery 2">
+                    <div class="gallery-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1582239634934-2e915f0eb5e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery 3">
+                    <div class="gallery-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1622296089863-eb7fccece7ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery 4">
+                    <div class="gallery-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================= FOOTER ================================= -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Footer About -->
+                <div class="footer-widget">
+                    <a href="index.html" class="logo" style="margin-bottom: 20px; display: block; font-size: 24px;">GENTLE<span>MAN</span></a>
+                    <p>O'zbekistondagi 1-raqamli premium sartaroshxona. Biz shunchaki xizmat ko'rsatmaymiz, biz erkaklar uchun hayot tarzini yaratamiz.</p>
+                    <div class="social-icons">
+                        <a href="#"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                        <a href="#"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.325V1.325C24 .597 23.403 0 22.675 0z"/></svg></a>
+                        <a href="#"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M21.582 6.848c-.237-.887-.936-1.586-1.823-1.823-1.609-.43-8.054-.43-8.054-.43s-6.446 0-8.055.43c-.887.237-1.585.936-1.822 1.823-.43 1.61-.43 4.966-.43 4.966s0 3.357.43 4.967c.237.886.935 1.585 1.822 1.822 1.609.43 8.055.43 8.055.43s6.445 0 8.054-.43c.887-.237 1.586-.936 1.823-1.822.43-1.61.43-4.967.43-4.967s0-3.356-.43-4.966zm-11.83 8.064V8.75l5.526 3.08-5.526 3.082z"/></svg></a>
+                    </div>
+                </div>
+
+                <!-- Fast Links -->
+                <div class="footer-widget">
+                    <h3>Tezkor Havolalar</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Bosh sahifa</a></li>
+                        <li><a href="about.html">Biz haqimizda</a></li>
+                        <li><a href="products.html">Kosmetikalar (Do'kon)</a></li>
+                        <li><a href="#services">Xizmatlar va Narxlar</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Working Hours -->
+                <div class="footer-widget">
+                    <h3>Ish Vaqti & Aloqa</h3>
+                    <ul class="working-hours">
+                        <li><span>Dushanba - Juma:</span> <span>10:00 - 22:00</span></li>
+                        <li><span>Shanba - Yakshanba:</span> <span>09:00 - 23:00</span></li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        📞 +998 90 123 45 67<br>
+                        📍 Toshkent sh, Amir Temur ko'chasi, 15-uy
+                    </p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2024 GENTLEMAN Premium Barber Shop. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================= JAVASCRIPT ================================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Mobile Menu Toggle Logic
+            const menuToggle = document.getElementById('mobileMenu');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // 2. Sticky Header Logic
+            const header = document.getElementById('header');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // 3. Scroll Reveal Animation Logic using IntersectionObserver
+            const revealElements = document.querySelectorAll('.reveal');
+
+            const revealCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: Unobserve after revealing to animate only once
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            };
+
+            const revealOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
